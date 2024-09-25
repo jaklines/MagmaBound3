@@ -7,10 +7,13 @@ using UnityEngine.UI;
 public class PlayerMovement2 : MonoBehaviour
 {
     [SerializeField] float moveSpeed = 5f;
+    [SerializeField] LayerMask bossLayer;
+
 
     int goodObjects = 0;
     int badObjects = 0;
     int maxObjects = 5;
+    //private int collectedCoins = 0;
 
     public Image powerBottle; //garrafinha
     public Image[] vida;
@@ -30,6 +33,8 @@ public class PlayerMovement2 : MonoBehaviour
         Vector3 pos = transform.position;
         pos.x = Mathf.Clamp(pos.x, -7.5f, 11.5f);
         transform.position = pos;
+
+      
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -58,6 +63,7 @@ public class PlayerMovement2 : MonoBehaviour
                 GameOver();
             }
         }
+
     }
 
     void UpdatePowerBar()
@@ -85,4 +91,23 @@ public class PlayerMovement2 : MonoBehaviour
     {
         SceneManager.LoadScene("GameOverScene");
     }
+
+
+    private bool Boss()
+    {
+        if (Physics.Raycast(transform.position, transform.up, 1.1f, bossLayer))
+        {
+            //pelo o que eu entendi coloca o dano no boss aqui
+
+
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+
 }

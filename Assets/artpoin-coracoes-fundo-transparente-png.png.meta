@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      artpoin-coracoes-fundo-transparente-png_0: 6563524577522762566
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

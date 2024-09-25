@@ -3,12 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Ground
-  - SpawnPoint
-  - Moeda
-  - Ruim
-  - Bom
+  tags: []
   layers:
   - Default
   - TransparentFX
@@ -16,10 +11,10 @@ TagManager:
   - 
   - Water
   - UI
-  - Player
-  - Wall
-  - Ground
-  - Potion
+  - 
+  - 
+  - 
+  - 
   - 
   - 
   - 

@@ -130,7 +130,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      magic-potion-bottle-png_0: -8444859508000810652
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
