@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class PlayerMovement2 : MonoBehaviour
 {
-    [SerializeField] float moveSpeed = 5f;
-    [SerializeField] LayerMask bossLayer;
-
-
-    int goodObjects = 0;
-    int badObjects = 0;
+   [SerializeField] float moveSpeed = 5f;
+   [SerializeField] private GameObject Boss;
+   [SerializeField] int goodObjects = 0;
+   [SerializeField] public int badObjects = 0;
+    
     int maxObjects = 5;
-    //private int collectedCoins = 0;
 
     public Image powerBottle; //garrafinha
-    public Image[] vida;
+    //public Image[] vida;
+    public List<Image> vida;
 
     private void Start()
     {
@@ -33,8 +33,6 @@ public class PlayerMovement2 : MonoBehaviour
         Vector3 pos = transform.position;
         pos.x = Mathf.Clamp(pos.x, -7.5f, 11.5f);
         transform.position = pos;
-
-      
     }
 
     void OnTriggerEnter2D(Collider2D other)
@@ -45,10 +43,13 @@ public class PlayerMovement2 : MonoBehaviour
             Destroy(other.gameObject);
 
             UpdatePowerBar(); //atualiza a garrafinha
+            receiveLife();
 
             if (goodObjects >= maxObjects)
             {
-                LoadNextScene(); // cena do boss
+                LoadBoss(); // cena do boss               
+                
+                    
             }
         }
         else if (other.CompareTag("Ruim"))
@@ -56,14 +57,9 @@ public class PlayerMovement2 : MonoBehaviour
             badObjects++;
             Destroy(other.gameObject);
 
-            UpdateHearts();
+            TookDamage();
 
-            if (badObjects >= maxObjects)
-            {
-                GameOver();
-            }
         }
-
     }
 
     void UpdatePowerBar()
@@ -73,41 +69,51 @@ public class PlayerMovement2 : MonoBehaviour
         powerBottle.fillAmount = fillAmount;
     }
 
-    void UpdateHearts()
+    /*void UpdateHearts()
     {
+
         // desativa os corações conforme coleta objetos ruins
-        if (badObjects <= vida.Length)
+        if (goodObjects >= powerBottle.fillAmount && Boss.activeSelf && ( badObjects >= 1 || badObjects <= 5) 
+        {
+            goodObjects++;
+            vida[badObjects - 1].enabled = true;
+            badObjects--;
+        }       
+        if (badObjects <= vida.Length && badObjects >= 1)
         {
             vida[badObjects - 1].enabled = false; // desativa um coração
         }
+    }*/
+
+    public void TookDamage()
+    {
+        if (badObjects - 1 <= vida.Count && badObjects >= 1)
+        {
+            vida[badObjects - 1].enabled = false; // desativa um coração
+        }
+        if (badObjects >= maxObjects)
+        {
+            GameOver();
+        }
     }
 
-    void LoadNextScene()
+    private void receiveLife()
     {
-        SceneManager.LoadScene("BossScene");
+        if (goodObjects >= powerBottle.fillAmount && Boss.activeSelf && badObjects >= 1 && badObjects <= 5)
+        {
+            goodObjects++;
+            vida[badObjects - 1].enabled = true;
+            badObjects--;
+        }
+    }
+
+    void LoadBoss()
+    {
+        Boss.SetActive(true);
     }
 
     void GameOver()
     {
         SceneManager.LoadScene("GameOverScene");
     }
-
-
-    private bool Boss()
-    {
-        if (Physics.Raycast(transform.position, transform.up, 1.1f, bossLayer))
-        {
-            //pelo o que eu entendi coloca o dano no boss aqui
-
-
-
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-    }
-
-
 }
