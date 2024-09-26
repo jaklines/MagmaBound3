@@ -11,7 +11,8 @@ public class PlayerMovement2 : MonoBehaviour
    [SerializeField] private GameObject Boss;
    [SerializeField] int goodObjects = 0;
    [SerializeField] public int badObjects = 0;
-    
+    [SerializeField] private SpawnM m;
+    public LayerMask bossLayer;
     int maxObjects = 5;
 
     public Image powerBottle; //garrafinha
@@ -110,10 +111,28 @@ public class PlayerMovement2 : MonoBehaviour
     void LoadBoss()
     {
         Boss.SetActive(true);
+        m.SpawnCoins();
+
     }
 
     void GameOver()
     {
         SceneManager.LoadScene("GameOverScene");
+    }
+
+    private bool Boss1()
+    {
+        if (Physics.Raycast(transform.position, transform.up, 1.1f, bossLayer))
+        {
+            //pelo o que eu entendi coloca o dano no boss aqui
+
+
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

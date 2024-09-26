@@ -19,7 +19,7 @@ public class BossMovement : MonoBehaviour
 
     Time GetTime;
     int speed = 6;
-    int life = 20;
+    
     
 
 

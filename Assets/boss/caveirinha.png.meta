@@ -156,7 +156,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      caveirinha_0: 6325378104972905069
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

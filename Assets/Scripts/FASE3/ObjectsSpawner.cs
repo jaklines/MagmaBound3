@@ -7,6 +7,8 @@ public class ObjectsSpawner : MonoBehaviour
     public GameObject[] objects;
     public float spawnRate = 1.5f;
     public float spawnRangeX = 8f;
+    
+
 
     void Start()
     {

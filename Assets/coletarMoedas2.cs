@@ -5,7 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class coletarMoedas2 : MonoBehaviour
 {
-    private int collectedCoins = 0;
+    [SerializeField] private int collectedCoins = 0;
+    public GameObject bullet;
 
     private void OnTriggerEnter2D(Collider2D moe)
     {
@@ -16,9 +17,9 @@ public class coletarMoedas2 : MonoBehaviour
 
             if (collectedCoins >= 5)
             {
-               //perguntar se eu coloco o codigo de pegar a informação de quantidade armazenada de
-               //moedas na script do player ou se faço aqui pra atirar automaticamente e perguntar se eu usei o RayCast certo
-
+                //perguntar se eu coloco o codigo de pegar a informação de quantidade armazenada de
+                //moedas na script do player ou se faço aqui pra atirar automaticamente e perguntar se eu usei o RayCast certo
+                Instantiate(bullet);
 
             }
         }
